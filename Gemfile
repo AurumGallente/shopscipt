@@ -46,3 +46,5 @@ end
 
 
 gem "roo", "~> 1.13.2"
+
+gem 'russian', '~> 0.6.0'
