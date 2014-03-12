@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  article: MyString
+  dealerprice: 1.5
+  dealercount: MyString
+  largeprice: 1.5
+  large: MyString
+  count: MyString
+  smallprice: 1.5
+  smallcount: MyString
+  retailprice: 1.5
+  retailcount: MyString
+
+two:
+  name: MyString
+  article: MyString
+  dealerprice: 1.5
+  dealercount: MyString
+  largeprice: 1.5
+  large: MyString
+  count: MyString
+  smallprice: 1.5
+  smallcount: MyString
+  retailprice: 1.5
+  retailcount: MyString

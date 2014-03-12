@@ -1,4 +1,29 @@
 Shop::Application.routes.draw do
+  resources :images do
+    member do
+      put 'reset'
+
+    end
+  end
+
+  resources :characteristics
+
+  resources :categories
+
+  resources :properties
+
+  resources :products do    
+    member do
+      put 'primary'
+      #delete 'destroy_from_products'
+      delete 'image/:image_id', :action => 'destroy_from_products', :as => 'destroy_from_products'
+    end
+    
+  end
+
+  get '/upload', to: 'upload#new'
+  post "upload/create"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

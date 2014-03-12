@@ -1,0 +1,93 @@
+<div class="span12">
+<%= form_for(@category, :html => { :class => 'form-horizontal', :role => 'form'}) do |f| %>
+  <% if @category.errors.any? %>
+    <div class="alert">
+      <p><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</p>
+
+      <ul>
+      <% @category.errors.full_messages.each do |msg| %>
+        <li><p class="danger"><%= msg %></p></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :name, :class => 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+    <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :title, :class => 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+    <%= f.text_field :title, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="control-group" id="image-div">
+
+      <%= f.fields_for :image do |i|  %>
+        <% if @image.image? %>
+    <script>
+      $('.imagebutton').css('display', 'none');
+     </script> 
+                <span class="col-sm-2 control-label"></span>
+                <%= image_tag @image.image, :class => 'preview', :size => '50'  %>
+               <% if !@image.id.nil? %>
+                <%= link_to 'remove', reset_image_path(@image, 'js'), :class => 'preview',  action: :reset, :method => :put, :remote => true %>
+                <% end %>
+       <% end %>
+    <%= i.file_field :image, :class => 'imagebutton' %>
+   <% end %>
+  </div>
+
+
+  <div class="control-group">
+    <%= f.label :description, :class => 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+    <%= f.text_field :description, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%  if (@my_array) %>
+      <%= f.label :parent_id, :class => 'col-sm-2 control-label' %>
+      <%= f.collection_select :parent_id, @my_array, :id, :name, include_blank:  true   %>
+    <% end %>
+  </div>
+
+
+
+  <div class="btn-group btn-group-lg" data-toggle="buttons">
+    <%= f.fields_for :characteristic do |ch|  %>
+      <%= hidden_field_tag "characteristic[property_ids][]", '' %>
+          <% for  p in Property.find(:all).to_a %>
+          <span class="col-sm-2 control-label"></span>
+          <label class="btn btn-default">
+          <%= check_box_tag "characteristic[property_ids][]", p.id, @characteristic.properties.include?(p)   %>
+          <%= image_tag p.image_url(:thumb).to_s , :title => p.name %>          
+          </label>
+          <br/>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :text, :class => 'col-sm-2 control-label' %>  
+    <div class="col-sm-10">
+      <%= tinymce %>
+    <%= f.text_area :text, :rows => '5', :class => 'tinymce', :rows => '10' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="col-sm-offset-2 col-sm-10">
+    
+    <%= f.submit class: 'btn btn-large btn-block btn-primary' %>
+    </div>
+  </div>
+<% end %>
+</div>
+
+
+

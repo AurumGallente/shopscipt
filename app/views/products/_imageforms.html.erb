@@ -1,0 +1,31 @@
+  <div class="span4">
+   <div class="controls">
+  <% if @product.images.count > 0 %>
+    <h5>Select primary photo</h5>
+      <%= form_for @product, :url => {:action => 'primary'}, :html => { :class => 'yellow', :id => 'primaryimage'}, :method => :put, :remote => true do |f| %>
+        <% @product.images.order(:id).each do |i| %>
+          <% if i.id %>
+            <label>
+            <%= radio_button_tag "product[images_attributes][]", i.id, i.primary, :class=>"radio" %>
+             <%= image_tag i.image_url(:thumb).to_s, :class =>'img-polaroid'  %>  
+            </label>
+          <% end %>
+        <% end %>
+       
+      <% end %>  
+    
+  </div>
+ </div>
+
+    <div class="span4">
+      <h5>Delete photos</h5>
+      <% @product.images.order(:id).each do |i| %>
+      <p>
+        <%= image_tag i.image_url(:thumb).to_s, :class =>'img-polaroid' if i.image %>
+        <%= link_to 'remove', destroy_from_products_product_path(@product, i), :class => 'preview',  action: :destroy_from_products, :method => :delete, :remote => true %>
+        
+
+      </p>
+      <% end %>
+    </div>
+ <% end %>

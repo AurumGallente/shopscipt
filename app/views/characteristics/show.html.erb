@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Characteristicable:</strong>
+  <%= @characteristic.characteristicable_id %>
+</p>
+
+<p>
+  <strong>Characteristicable type:</strong>
+  <%= @characteristic.characteristicable_type %>
+</p>
+
+<%= link_to 'Edit', edit_characteristic_path(@characteristic) %> |
+<%= link_to 'Back', characteristics_path %>

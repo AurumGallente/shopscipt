@@ -1,0 +1,26 @@
+<%= form_for(@characteristic) do |f| %>
+  <% if @characteristic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@characteristic.errors.count, "error") %> prohibited this characteristic from being saved:</h2>
+
+      <ul>
+      <% @characteristic.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+
+  <% end %>
+    <%= hidden_field_tag "characteristic[property_ids][]", '' %>
+    <% for  p in Property.find(:all).to_a %>
+        <p>
+        <%= check_box_tag "characteristic[property_ids][]", p.id, @characteristic.properties.include?(p)  %>
+        <%= image_tag p.image_url(:thumb).to_s %>
+        <%= p.name %>
+        </p>
+    <% end %>
+        <%=  %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

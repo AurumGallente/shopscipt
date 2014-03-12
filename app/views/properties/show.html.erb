@@ -1,0 +1,16 @@
+
+
+<p>
+  <strong>Name:</strong>
+  <%= @property.name %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @property.image_url(:thumb).to_s %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_property_path(@property) %> |
+<%= link_to 'Back', properties_path %>

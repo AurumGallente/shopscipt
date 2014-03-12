@@ -1,0 +1,29 @@
+<h1>Listing characteristics</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Characteristicable</th>
+      <th>Characteristicable type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @characteristics.each do |characteristic| %>
+      <tr>
+        <td><%= characteristic.characteristicable_id %></td>
+        <td><%= characteristic.characteristicable_type %></td>
+        <td><%= link_to 'Show', characteristic %></td>
+        <td><%= link_to 'Edit', edit_characteristic_path(characteristic) %></td>
+        <td><%= link_to 'Destroy', characteristic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Characteristic', new_characteristic_path %>
